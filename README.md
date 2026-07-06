@@ -6,8 +6,8 @@ A polished Employee Dashboard built with **React**, **TypeScript**, and **Tailwi
 
 | Item | Link |
 |------|------|
-| **GitHub Repository** | [https://github.com/jayeshdhule/Employee-Dashboard](https://github.com/jayeshdhule/Employee-Dashboard) |
-| **Live Demo** | [https://employee-dashboard-omega-cyan.vercel.app](https://employee-dashboard-omega-cyan.vercel.app) |
+| **GitHub Repository** | [https://github.com/jayeshdhule/Employee-Dashboard] |
+| **Live Demo** | [https://employee-dashboard-omega-cyan.vercel.app]|
 
 ---
 
@@ -241,11 +241,3 @@ Build output directory: `dist`
 | `npm run preview` | Preview production build |
 | `npm run lint` | Run oxlint |
 
----
-
-## Author
-
-Built as a take-home assignment for RPS Junior Frontend Developer role.
-
-**Repository:** [https://github.com/jayeshdhule/Employee-Dashboard](https://github.com/jayeshdhule/Employee-Dashboard)  
-**Live App:** [https://employee-dashboard-omega-cyan.vercel.app](https://employee-dashboard-omega-cyan.vercel.app)
