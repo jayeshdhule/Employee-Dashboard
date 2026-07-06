@@ -1,0 +1,32 @@
+[
+  {
+    "id": "lr-001",
+    "startDate": "2026-06-10",
+    "endDate": "2026-06-12",
+    "type": "annual",
+    "reason": "Family vacation",
+    "status": "approved",
+    "days": 3,
+    "submittedAt": "2026-05-20T10:00:00Z"
+  },
+  {
+    "id": "lr-002",
+    "startDate": "2026-07-15",
+    "endDate": "2026-07-15",
+    "type": "sick",
+    "reason": "Medical appointment",
+    "status": "pending",
+    "days": 1,
+    "submittedAt": "2026-07-01T14:30:00Z"
+  },
+  {
+    "id": "lr-003",
+    "startDate": "2026-04-01",
+    "endDate": "2026-04-01",
+    "type": "personal",
+    "reason": "Personal errands",
+    "status": "approved",
+    "days": 1,
+    "submittedAt": "2026-03-25T09:00:00Z"
+  }
+]

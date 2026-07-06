@@ -1,0 +1,13 @@
+{
+  "id": "emp-001",
+  "name": "Alex Morgan",
+  "email": "alex.morgan@company.com",
+  "role": "Senior Frontend Developer",
+  "department": "Engineering",
+  "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
+  "phone": "+1 (555) 234-5678",
+  "location": "San Francisco, CA",
+  "joinDate": "2022-03-15",
+  "manager": "Sarah Chen",
+  "bio": "Passionate about building accessible, performant web applications. Currently leading the design system initiative."
+}

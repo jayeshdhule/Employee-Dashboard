@@ -1,0 +1,122 @@
+[
+  {
+    "id": "emp-001",
+    "name": "Alex Morgan",
+    "email": "alex.morgan@company.com",
+    "role": "Senior Frontend Developer",
+    "department": "Engineering",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
+    "phone": "+1 (555) 234-5678",
+    "location": "San Francisco, CA",
+    "joinDate": "2022-03-15",
+    "status": "active"
+  },
+  {
+    "id": "emp-002",
+    "name": "Sarah Chen",
+    "email": "sarah.chen@company.com",
+    "role": "Engineering Manager",
+    "department": "Engineering",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+    "phone": "+1 (555) 345-6789",
+    "location": "San Francisco, CA",
+    "joinDate": "2019-08-01",
+    "status": "active"
+  },
+  {
+    "id": "emp-003",
+    "name": "James Wilson",
+    "email": "james.wilson@company.com",
+    "role": "Backend Developer",
+    "department": "Engineering",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=James",
+    "phone": "+1 (555) 456-7890",
+    "location": "Austin, TX",
+    "joinDate": "2021-01-10",
+    "status": "remote"
+  },
+  {
+    "id": "emp-004",
+    "name": "Emily Rodriguez",
+    "email": "emily.rodriguez@company.com",
+    "role": "UX Designer",
+    "department": "Design",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Emily",
+    "phone": "+1 (555) 567-8901",
+    "location": "New York, NY",
+    "joinDate": "2020-06-22",
+    "status": "active"
+  },
+  {
+    "id": "emp-005",
+    "name": "Michael Park",
+    "email": "michael.park@company.com",
+    "role": "Product Manager",
+    "department": "Product",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael",
+    "phone": "+1 (555) 678-9012",
+    "location": "Seattle, WA",
+    "joinDate": "2018-11-05",
+    "status": "active"
+  },
+  {
+    "id": "emp-006",
+    "name": "Lisa Thompson",
+    "email": "lisa.thompson@company.com",
+    "role": "HR Specialist",
+    "department": "Human Resources",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Lisa",
+    "phone": "+1 (555) 789-0123",
+    "location": "Chicago, IL",
+    "joinDate": "2019-04-18",
+    "status": "active"
+  },
+  {
+    "id": "emp-007",
+    "name": "David Kumar",
+    "email": "david.kumar@company.com",
+    "role": "DevOps Engineer",
+    "department": "Engineering",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
+    "phone": "+1 (555) 890-1234",
+    "location": "Denver, CO",
+    "joinDate": "2021-09-30",
+    "status": "remote"
+  },
+  {
+    "id": "emp-008",
+    "name": "Rachel Green",
+    "email": "rachel.green@company.com",
+    "role": "Marketing Lead",
+    "department": "Marketing",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Rachel",
+    "phone": "+1 (555) 901-2345",
+    "location": "Los Angeles, CA",
+    "joinDate": "2020-02-14",
+    "status": "on-leave"
+  },
+  {
+    "id": "emp-009",
+    "name": "Tom Baker",
+    "email": "tom.baker@company.com",
+    "role": "QA Engineer",
+    "department": "Engineering",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Tom",
+    "phone": "+1 (555) 012-3456",
+    "location": "Boston, MA",
+    "joinDate": "2022-07-11",
+    "status": "active"
+  },
+  {
+    "id": "emp-010",
+    "name": "Nina Patel",
+    "email": "nina.patel@company.com",
+    "role": "Data Analyst",
+    "department": "Analytics",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Nina",
+    "phone": "+1 (555) 123-4567",
+    "location": "Miami, FL",
+    "joinDate": "2023-01-09",
+    "status": "active"
+  }
+]

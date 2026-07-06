@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ann-001",
+    "title": "Q3 Company All-Hands Meeting",
+    "content": "Join us for our quarterly all-hands meeting on July 15th at 2:00 PM PST. We'll be discussing our Q2 achievements, upcoming product launches, and strategic priorities for the second half of the year. Key highlights include a 23% revenue growth, successful launch of our mobile app, and expansion into two new markets. The leadership team will also share updates on the new hybrid work policy and answer your questions during the live Q&A session. Please mark your calendars and submit questions in advance through the internal portal. Remote employees can join via the Zoom link that will be sent 24 hours before the event.",
+    "author": "Michael Park",
+    "department": "Executive",
+    "publishedAt": "2026-07-01T09:00:00Z",
+    "priority": "high",
+    "tags": ["all-hands", "company-wide", "Q3"]
+  },
+  {
+    "id": "ann-002",
+    "title": "Updated Remote Work Policy",
+    "content": "Effective August 1st, we're updating our remote work policy to offer more flexibility. Employees can now work remotely up to 3 days per week without manager pre-approval. Core collaboration days (Tuesdays and Thursdays) remain in-office for teams that require synchronous work. Please review the full policy document on the HR portal and acknowledge receipt by July 20th. The updated policy also includes guidelines for home office stipends, co-working space reimbursements, and international remote work requests.",
+    "author": "Lisa Thompson",
+    "department": "Human Resources",
+    "publishedAt": "2026-06-28T11:30:00Z",
+    "priority": "high",
+    "tags": ["HR", "remote-work", "policy"]
+  },
+  {
+    "id": "ann-003",
+    "title": "Design System v2.0 Launch",
+    "content": "We're excited to announce the launch of Design System v2.0! This major update includes 45 new components, improved accessibility standards (WCAG 2.1 AA compliant), and a refreshed color palette. All engineering teams are encouraged to migrate by September 30th. Documentation and migration guides are available on Confluence. Training sessions will be held every Wednesday in July. The new system reduces development time by an estimated 30% and ensures brand consistency across all products.",
+    "author": "Emily Rodriguez",
+    "department": "Design",
+    "publishedAt": "2026-06-25T14:00:00Z",
+    "priority": "medium",
+    "tags": ["design", "engineering", "launch"]
+  },
+  {
+    "id": "ann-004",
+    "title": "Summer Wellness Challenge",
+    "content": "Kick off your summer with our annual Wellness Challenge! From July 7th to August 7th, track your daily steps, meditation minutes, or workout sessions. Top performers win gift cards and an extra PTO day. Sign up on the wellness portal by July 5th. Team challenges are encouraged — form groups of 4-6 colleagues for bonus rewards. This year's theme is 'Move & Connect' focusing on both physical activity and social wellbeing.",
+    "author": "Lisa Thompson",
+    "department": "Human Resources",
+    "publishedAt": "2026-06-20T10:00:00Z",
+    "priority": "low",
+    "tags": ["wellness", "events", "summer"]
+  },
+  {
+    "id": "ann-005",
+    "title": "Security Awareness Training Due",
+    "content": "Reminder: All employees must complete the annual security awareness training by July 31st. The training covers phishing prevention, password hygiene, data handling procedures, and incident reporting protocols. Access the course through the Learning Management System. Non-completion may result in restricted system access. The training takes approximately 45 minutes and includes a short assessment. Contact IT support if you encounter any technical issues.",
+    "author": "David Kumar",
+    "department": "IT Security",
+    "publishedAt": "2026-06-18T08:00:00Z",
+    "priority": "medium",
+    "tags": ["security", "training", "compliance"]
+  }
+]

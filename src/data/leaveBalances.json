@@ -1,0 +1,6 @@
+[
+  { "type": "annual", "total": 20, "used": 8, "remaining": 12 },
+  { "type": "sick", "total": 10, "used": 2, "remaining": 8 },
+  { "type": "personal", "total": 5, "used": 1, "remaining": 4 },
+  { "type": "unpaid", "total": 0, "used": 0, "remaining": 0 }
+]
