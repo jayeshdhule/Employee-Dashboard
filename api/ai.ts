@@ -38,9 +38,21 @@ function parseBody(req: VercelRequest): AiRequestBody {
   return req.body as AiRequestBody;
 }
 
+function extractJson(text: string): string {
+  const trimmed = text.trim();
+  const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if (fenced?.[1]) return fenced[1].trim();
+
+  const start = trimmed.indexOf('{');
+  const end = trimmed.lastIndexOf('}');
+  if (start !== -1 && end > start) return trimmed.slice(start, end + 1);
+
+  return trimmed;
+}
+
 function parseJson<T>(text: string): T | null {
   try {
-    return JSON.parse(text) as T;
+    return JSON.parse(extractJson(text)) as T;
   } catch {
     return null;
   }
@@ -48,6 +60,11 @@ function parseJson<T>(text: string): T | null {
 
 function readingTime(content: string): number {
   return Math.max(1, Math.ceil(content.split(/\s+/).length / 200));
+}
+
+function normalizeSentiment(value: unknown): LeaveSentiment {
+  if (value === 'positive' || value === 'neutral' || value === 'informative') return value;
+  return 'neutral';
 }
 
 async function callGemini(
@@ -62,50 +79,81 @@ async function callGemini(
     generationConfig: { temperature, responseMimeType: 'application/json' },
   });
 
+  let lastError = 'Gemini request failed';
+
   for (const model of GEMINI_MODELS) {
-    const response = await fetch(`${GEMINI_BASE}/${model}:generateContent`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-      body: payload,
-    });
+    try {
+      const response = await fetch(`${GEMINI_BASE}/${model}:generateContent`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+        body: payload,
+      });
 
-    if (response.ok) {
-      const data = (await response.json()) as GeminiResponse;
-      return data.candidates?.[0]?.content?.parts?.[0]?.text ?? null;
-    }
+      if (response.ok) {
+        const data = (await response.json()) as GeminiResponse;
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (text) return text;
+        lastError = 'Empty Gemini response';
+        continue;
+      }
 
-    const errorData = (await response.json()) as GeminiResponse;
-    if (response.status !== 429 && response.status !== 503) {
-      console.error(`Gemini ${model} error:`, errorData.error?.message ?? response.status);
-      return null;
+      const errorData = (await response.json()) as GeminiResponse;
+      lastError = errorData.error?.message ?? `HTTP ${response.status}`;
+
+      if ([429, 503, 404, 400].includes(response.status)) continue;
+      break;
+    } catch (error) {
+      lastError = error instanceof Error ? error.message : 'Network error';
     }
   }
 
+  console.error('All Gemini models failed:', lastError);
   return null;
+}
+
+async function summarizeWithGemini(
+  apiKey: string,
+  title: string,
+  content: string,
+): Promise<AISummaryResult> {
+  const systemPrompt =
+    'You are an HR announcement summarizer. Respond with valid JSON only. Required keys: summary (string, 2-3 sentences), keyPoints (array of 3-4 short strings), sentiment (exactly one of: positive, neutral, informative).';
+
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const text = await callGemini(
+      apiKey,
+      systemPrompt,
+      `Summarize this announcement:\nTitle: ${title}\n\n${content}`,
+      attempt === 0 ? 0.3 : 0.1,
+    );
+
+    if (!text) continue;
+
+    const parsed = parseJson<Record<string, unknown>>(text);
+    if (!parsed || typeof parsed.summary !== 'string' || !parsed.summary.trim()) continue;
+
+    const keyPoints = Array.isArray(parsed.keyPoints)
+      ? parsed.keyPoints.map(String).filter(Boolean).slice(0, 4)
+      : [];
+
+    return {
+      summary: parsed.summary.trim(),
+      keyPoints: keyPoints.length > 0 ? keyPoints : [parsed.summary.trim()],
+      sentiment: normalizeSentiment(parsed.sentiment),
+      readingTimeMinutes: readingTime(content),
+      provider: 'gemini',
+    };
+  }
+
+  throw new Error('Could not generate a valid summary. Please try again.');
 }
 
 async function handleAiRequest(body: AiRequestBody, apiKey: string): Promise<AiResponseBody> {
   if (body.action === 'summarize') {
     if (!body.title || !body.content) throw new Error('Missing title or content');
-
-    const text = await callGemini(
-      apiKey,
-      'You are an HR announcement summarizer. Return JSON only with keys: summary (2-3 sentences), keyPoints (array of 3-4 strings), sentiment (positive|neutral|informative).',
-      `Summarize this announcement:\nTitle: ${body.title}\n\n${body.content}`,
-    );
-
-    const parsed = text
-      ? parseJson<Omit<AISummaryResult, 'readingTimeMinutes' | 'provider'>>(text)
-      : null;
-    if (!parsed?.summary) throw new Error('Invalid Gemini response');
-
     return {
       provider: 'gemini',
-      result: {
-        ...parsed,
-        readingTimeMinutes: readingTime(body.content),
-        provider: 'gemini',
-      },
+      result: await summarizeWithGemini(apiKey, body.title, body.content),
     };
   }
 
@@ -120,7 +168,7 @@ async function handleAiRequest(body: AiRequestBody, apiKey: string): Promise<AiR
     );
 
     const parsed = text ? parseJson<{ title: string; content: string }>(text) : null;
-    if (!parsed?.title || !parsed?.content) throw new Error('Invalid Gemini response');
+    if (!parsed?.title || !parsed?.content) throw new Error('Could not generate draft. Please try again.');
 
     return { provider: 'gemini', result: parsed };
   }
@@ -140,7 +188,7 @@ async function handleAiRequest(body: AiRequestBody, apiKey: string): Promise<AiR
     );
 
     const parsed = text ? parseJson<{ digest: string }>(text) : null;
-    if (!parsed?.digest) throw new Error('Invalid Gemini response');
+    if (!parsed?.digest) throw new Error('Could not generate digest. Please try again.');
 
     return { provider: 'gemini', result: { digest: parsed.digest.slice(0, 400) } };
   }

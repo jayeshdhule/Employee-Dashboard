@@ -103,7 +103,7 @@ function summarizeLocally(title: string, content: string): AISummaryResult {
   };
 }
 
-async function callFreeAiApi(body: AiRequestBody): Promise<AiResponseBody | null> {
+async function callFreeAiApi(body: AiRequestBody, attempt = 1): Promise<AiResponseBody | null> {
   try {
     const response = await fetch('/api/ai', {
       method: 'POST',
@@ -112,11 +112,19 @@ async function callFreeAiApi(body: AiRequestBody): Promise<AiResponseBody | null
     });
 
     if (!response.ok) {
+      if (attempt < 2 && response.status >= 500) {
+        await delay(600);
+        return callFreeAiApi(body, attempt + 1);
+      }
       console.warn('Gemini API unavailable, using local fallback:', response.status);
       return null;
     }
     return (await response.json()) as AiResponseBody;
   } catch (error) {
+    if (attempt < 2) {
+      await delay(600);
+      return callFreeAiApi(body, attempt + 1);
+    }
     console.warn('Gemini API request failed, using local fallback:', error);
     return null;
   }
